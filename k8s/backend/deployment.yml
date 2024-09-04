@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: lrbedeploy
+  namespace: backendlr
+spec:
+  selector:
+    matchLabels:
+      app: lrbedeploy
+  template:
+    metadata:
+      labels:
+        app: lrbedeploy
+    spec:
+      containers:
+      - name: lrbedeploy
+        image: ravikishans/learnerreport:backend
+        env:
+        - name: MONGO_URI
+          valueFrom:
+            secretKeyRef:
+              name: backend-secret
+              key: MONGO_URI
+        - name: PORT
+          value: "3001"
+        ports:
+        - containerPort: 3001

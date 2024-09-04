@@ -1,0 +1,26 @@
+version: '3.8'
+services:
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    image: ravikishans/learnerreport:frontend
+    container_name: learner-frontend
+    environment:
+      # Add necessary environment variables here
+      - REACT_APP_API_URL=http://localhost:3001 # Example environment variable
+    ports:
+      - "3000:3000"
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    image: ravikishans/learnerreport:backend
+    container_name: learner-backend
+    environment:
+      # Add necessary environment variables here
+      - NODE_ENV=production # Example environment variable
+      - DB_HOST=mongodb+srv://ravikishan:Cluster0@cluster0.y9zohpu.mongodb.net/learnerReport # Example for MongoDB connection
+    ports:
+      - "3001:3001"

@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: lrbeservice
+  namespace: backendlr
+spec:
+  selector:
+    app: lrbedeploy
+  ports:
+  - port: 3001
+    targetPort: 3001
