@@ -11,6 +11,7 @@ pipeline {
         FRONTEND_NAMESPACE = "frontendlr"
         DATABASE_NAMESPACE = "databaselr"
         HELM_RELEASE_NAME = "learnerreport"
+        KUBECONFIG = '/home/jenkins/.kube/config'
     }
 
     stages {
