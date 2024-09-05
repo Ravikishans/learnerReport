@@ -44,13 +44,7 @@ pipeline {
                     withCredentials([file(credentialsId: 'kubeconfig-credentials', variable: 'KUBECONFIG')]) {
                         // Deploy the application using Helm
                         sh """
-                            helm upgrade --install ${HELM_RELEASE_NAME} ./k8s/helm-package/learnerreport \
-                                --namespace default \
-                                --set frontend.image.repository=${DOCKER_REGISTRY}/learnerreport \
-                                --set frontend.image.tag=frontend \
-                                --set backend.image.repository=${DOCKER_REGISTRY}/learnerreport \
-                                --set backend.image.tag=backend \
-                                --debug
+                          helm upgrade --install learnerreport --generate-name --namespace=default --debug  
                         """
                     }
                 }
