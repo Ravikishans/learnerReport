@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: lrbeservice
+  namespace: {{ .Values.backend.namespace }}
+spec:
+  selector:
+    app: lrbedeploy
+  ports:
+  - port: {{ .Values.backend.service.port }}
+    targetPort: {{ .Values.backend.ports.containerPort }}
+  type: ClusterIP

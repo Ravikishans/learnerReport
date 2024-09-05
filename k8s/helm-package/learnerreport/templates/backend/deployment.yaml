@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: lrbedeploy
+  namespace: {{ .Values.backend.namespace }}
+spec:
+  selector:
+    matchLabels:
+      app: lrbedeploy
+  template:
+    metadata:
+      labels:
+        app: lrbedeploy
+    spec:
+      containers:
+      - name: lrbedeploy
+        image: {{ .Values.backend.image.repository }}:{{ .Values.backend.image.tag }}
+        env:
+        - name: MONGO_URI
+          valueFrom:
+            secretKeyRef:
+              name: backend-secret
+              key: MONGO_URI
+        - name: PORT
+          value: {{ .Values.backend.env.PORT | quote }}
+        ports:
+        - containerPort: {{ .Values.backend.ports.containerPort }}

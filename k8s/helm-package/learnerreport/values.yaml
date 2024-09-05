@@ -1,0 +1,34 @@
+frontend:
+  namespace: frontendlr
+  image:
+    repository: ravikishans/learnerreport
+    tag: frontend
+  replicas: 2
+  service:
+    port: 3000
+    targetPort: 3000
+  data:
+    REACT_APP_BACKEND_URL: "http://localhost:3001"
+
+backend:
+  namespace: backendlr
+  image:
+    repository: ravikishans/learnerreport
+    tag: backend
+  replicas: 2
+  env:
+    MONGO_URL: mongodb://mongodb-service.databaselr.svc.cluster.local:27017/learnerreport
+    PORT: "3001"
+  ports:
+    containerPort: 3001
+    protocol: TCP
+  service:
+    port: 3001
+
+database:
+  namespace: databaselr
+  pvc:
+    storage: 3Gi
+  service:
+    port: 27017
+    targetPort: 27017
