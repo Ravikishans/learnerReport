@@ -44,7 +44,7 @@ pipeline {
                     withCredentials([file(credentialsId: 'kubeconfig-credentials', variable: 'KUBECONFIG')]) {
                         // Deploy the application using Helm
                         sh """
-                          helm install learnerreport --generate-name --namespace=default --debug  
+                          helm install ./k8s/helm-package/learnerreport --generate-name --namespace=default --debug  
                         """
                     }
                 }
