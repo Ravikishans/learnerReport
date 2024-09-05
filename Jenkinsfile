@@ -46,10 +46,10 @@ pipeline {
                         sh """
                             helm upgrade --install ${HELM_RELEASE_NAME} ./k8s/helm-package/learnerreport \
                                 --namespace default \
-                                --set frontend.image.repository=${DOCKER_REGISTRY}/frontend-image \
-                                --set frontend.image.tag=latest \
-                                --set backend.image.repository=${DOCKER_REGISTRY}/backend-image \
-                                --set backend.image.tag=latest \
+                                --set frontend.image.repository=${DOCKER_REGISTRY}/learnerreport \
+                                --set frontend.image.tag=frontend \
+                                --set backend.image.repository=${DOCKER_REGISTRY}/learnerreport \
+                                --set backend.image.tag=backend \
                                 --debug
                         """
                     }
