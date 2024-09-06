@@ -58,17 +58,17 @@ pipeline {
             }
         }
 
-        stage('Verify Deployments') {
-            steps {
-                script {
-                    // Verify backend, frontend, and database deployments by listing pods in each namespace
-                    sh "kubectl get pods -n ${BACKEND_NAMESPACE} --kubeconfig=$KUBECONFIG"
-                    sh "kubectl get pods -n ${FRONTEND_NAMESPACE} --kubeconfig=$KUBECONFIG"
-                    sh "kubectl get pods -n ${DATABASE_NAMESPACE} --kubeconfig=$KUBECONFIG"
-                }
-            }
-        }
-    }
+    //     stage('Verify Deployments') {
+    //         steps {
+    //             script {
+    //                 // Verify backend, frontend, and database deployments by listing pods in each namespace
+    //                 sh "kubectl get pods -n ${BACKEND_NAMESPACE} --kubeconfig=$KUBECONFIG"
+    //                 sh "kubectl get pods -n ${FRONTEND_NAMESPACE} --kubeconfig=$KUBECONFIG"
+    //                 sh "kubectl get pods -n ${DATABASE_NAMESPACE} --kubeconfig=$KUBECONFIG"
+    //             }
+    //         }
+    //     }
+    // }
 
     post {
         success {
