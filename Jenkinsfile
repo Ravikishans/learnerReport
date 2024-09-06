@@ -61,8 +61,10 @@ pipeline {
         stage('Verify Deployments') {
             steps {
                 script {
+                    withCredentials([file(credentialsId: 'kubeconfig-credentials', variable: 'KUBECONFIG')]) {
                     // Verify backend, frontend, and database deployments by listing pods in each namespace
                     sh "kubectl get pods --namespace default --kubeconfig=$KUBECONFIG"
+                    }
                 }
             }
         }
