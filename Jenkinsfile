@@ -42,52 +42,16 @@ pipeline {
             }
         }
 
-        stage('Deploy Backend to Kubernetes') {
+        stage('Deploy to Kubernetes using Helm') {
             steps {
                 script {
-                    // Use kubeconfig from Jenkins credentials to authenticate
+                    // Use kubeconfig from Jenkins credentials to authenticate with Kubernetes
                     withCredentials([file(credentialsId: 'kubeconfig-credentials', variable: 'KUBECONFIG')]) {
-                        // Deploy backend using Helm
+                        // Helm install or upgrade command to deploy everything at once
                         sh """
-                            helm upgrade --install backend ${HELM_RELEASE_NAME}-backend ${HELM_CHART_PATH}/charts/backend \
-                                --set image.repository=${DOCKER_REGISTRY}/learnerreport \
-                                --set image.tag=backend \
-                                --namespace ${BACKEND_NAMESPACE} \
-                                --kubeconfig=$KUBECONFIG
-                        """
-                    }
-                }
-            }
-        }
-
-        stage('Deploy Frontend to Kubernetes') {
-            steps {
-                script {
-                    // Deploy frontend using Helm
-                    withCredentials([file(credentialsId: 'kubeconfig-credentials', variable: 'KUBECONFIG')]) {
-                        sh """
-                            helm upgrade --install frontend ${HELM_RELEASE_NAME}-frontend ${HELM_CHART_PATH}/charts/frontend \
-                                --set image.repository=${DOCKER_REGISTRY}/learnerreport \
-                                --set image.tag=frontend \
-                                --namespace ${FRONTEND_NAMESPACE} \
-                                --kubeconfig=$KUBECONFIG
-                        """
-                    }
-                }
-            }
-        }
-
-        stage('Deploy Database to Kubernetes') {
-            steps {
-                script {
-                    // Deploy database using Helm
-                    withCredentials([file(credentialsId: 'kubeconfig-credentials', variable: 'KUBECONFIG')]) {
-                        sh """
-                            helm upgrade --install database ${HELM_RELEASE_NAME}-database ${HELM_CHART_PATH}/charts/database \
-                                --set image.repository=mongo \
-                                --set image.tag=latest \
-                                --namespace ${DATABASE_NAMESPACE} \
-                                --kubeconfig=$KUBECONFIG
+                            helm upgrade --install ${HELM_RELEASE_NAME} ${HELM_CHART_PATH} \
+                                --namespace default --create-namespace \
+                                --kubeconfig=$KUBECONFIG --debug
                         """
                     }
                 }
