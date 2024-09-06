@@ -1,0 +1,577 @@
+Started by user Ravi Kishan Srivastav
+Checking out git https://github.com/Ravikishans/learnerReport.git into /var/lib/jenkins/workspace/containerOrchestration@script/6593b1be6c94bdff95ccea2d8d16b0de5a67f9ade65f2430f23bfb31239c42c8 to read Jenkinsfile
+Selected Git installation does not exist. Using Default
+The recommended git tool is: NONE
+No credentials specified
+ > git rev-parse --resolve-git-dir /var/lib/jenkins/workspace/containerOrchestration@script/6593b1be6c94bdff95ccea2d8d16b0de5a67f9ade65f2430f23bfb31239c42c8/.git # timeout=10
+Fetching changes from the remote Git repository
+ > git config remote.origin.url https://github.com/Ravikishans/learnerReport.git # timeout=10
+Fetching upstream changes from https://github.com/Ravikishans/learnerReport.git
+ > git --version # timeout=10
+ > git --version # 'git version 2.25.1'
+ > git fetch --tags --force --progress -- https://github.com/Ravikishans/learnerReport.git +refs/heads/*:refs/remotes/origin/* # timeout=10
+ > git rev-parse refs/remotes/origin/main^{commit} # timeout=10
+Checking out Revision e386f8ab6d8d0b33949ea74627a588856887308d (refs/remotes/origin/main)
+ > git config core.sparsecheckout # timeout=10
+ > git checkout -f e386f8ab6d8d0b33949ea74627a588856887308d # timeout=10
+Commit message: "0"
+ > git rev-list --no-walk 9b7223a866939071cbfa5494cda7f3ff5d13ecf1 # timeout=10
+[Pipeline] Start of Pipeline
+[Pipeline] node
+Running on Jenkins in /var/lib/jenkins/workspace/containerOrchestration@2
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (Declarative: Checkout SCM)
+[Pipeline] checkout
+Selected Git installation does not exist. Using Default
+The recommended git tool is: NONE
+No credentials specified
+ > git rev-parse --resolve-git-dir /var/lib/jenkins/workspace/containerOrchestration@2/.git # timeout=10
+Fetching changes from the remote Git repository
+ > git config remote.origin.url https://github.com/Ravikishans/learnerReport.git # timeout=10
+Fetching upstream changes from https://github.com/Ravikishans/learnerReport.git
+ > git --version # timeout=10
+ > git --version # 'git version 2.25.1'
+ > git fetch --tags --force --progress -- https://github.com/Ravikishans/learnerReport.git +refs/heads/*:refs/remotes/origin/* # timeout=10
+ > git rev-parse refs/remotes/origin/main^{commit} # timeout=10
+Checking out Revision e386f8ab6d8d0b33949ea74627a588856887308d (refs/remotes/origin/main)
+ > git config core.sparsecheckout # timeout=10
+ > git checkout -f e386f8ab6d8d0b33949ea74627a588856887308d # timeout=10
+Commit message: "0"
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] withCredentials
+Masking supported pattern matches of $DOCKER_CREDENTIALS or $DOCKER_CREDENTIALS_PSW
+[Pipeline] {
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (Checkout Code)
+[Pipeline] script
+[Pipeline] {
+[Pipeline] git
+Selected Git installation does not exist. Using Default
+The recommended git tool is: NONE
+No credentials specified
+ > git rev-parse --resolve-git-dir /var/lib/jenkins/workspace/containerOrchestration@2/.git # timeout=10
+Fetching changes from the remote Git repository
+ > git config remote.origin.url https://github.com/Ravikishans/learnerReport # timeout=10
+Fetching upstream changes from https://github.com/Ravikishans/learnerReport
+ > git --version # timeout=10
+ > git --version # 'git version 2.25.1'
+ > git fetch --tags --force --progress -- https://github.com/Ravikishans/learnerReport +refs/heads/*:refs/remotes/origin/* # timeout=10
+ > git rev-parse refs/remotes/origin/main^{commit} # timeout=10
+Checking out Revision e386f8ab6d8d0b33949ea74627a588856887308d (refs/remotes/origin/main)
+ > git config core.sparsecheckout # timeout=10
+ > git checkout -f e386f8ab6d8d0b33949ea74627a588856887308d # timeout=10
+ > git branch -a -v --no-abbrev # timeout=10
+ > git branch -D main # timeout=10
+ > git checkout -b main e386f8ab6d8d0b33949ea74627a588856887308d # timeout=10
+Commit message: "0"
+[Pipeline] }
+[Pipeline] // script
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Build and Push Docker Images)
+[Pipeline] script
+[Pipeline] {
+[Pipeline] sh
+Warning: A secret was passed to "sh" using Groovy String interpolation, which is insecure.
+		 Affected argument(s) used the following variable(s): [DOCKER_CREDENTIALS_PSW]
+		 See https://jenkins.io/redirect/groovy-string-interpolation for details.
++ docker-compose build
+time="2024-09-06T18:19:50+05:30" level=warning msg="/var/lib/jenkins/workspace/containerOrchestration@2/docker-compose.yml: the attribute `version` is obsolete, it will be ignored, please remove it to avoid potential confusion"
+#0 building with "default" instance using docker driver
+
+#1 [backend internal] load build definition from Dockerfile
+#1 transferring dockerfile: 30B 0.1s
+#1 transferring dockerfile: 426B 0.1s done
+#1 DONE 0.2s
+
+#2 [frontend internal] load build definition from Dockerfile
+#2 transferring dockerfile: 274B 0.1s done
+#2 DONE 0.2s
+
+#3 [frontend internal] load metadata for docker.io/library/node:16
+#3 DONE 1.4s
+
+#4 [backend internal] load .dockerignore
+#4 transferring context: 2B done
+#4 DONE 0.1s
+
+#5 [frontend internal] load .dockerignore
+#5 transferring context: 2B done
+#5 DONE 0.1s
+
+#6 [backend internal] load build context
+#6 DONE 0.0s
+
+#7 [backend 1/5] FROM docker.io/library/node:16@sha256:f77a1aef2da8d83e45ec990f45df50f1a286c5fe8bbfb8c6e4246c6389705c0b
+#7 DONE 0.0s
+
+#7 [frontend 1/5] FROM docker.io/library/node:16@sha256:f77a1aef2da8d83e45ec990f45df50f1a286c5fe8bbfb8c6e4246c6389705c0b
+#7 DONE 0.0s
+
+#8 [frontend internal] load build context
+#8 transferring context: 5.13kB 0.1s done
+#8 DONE 0.1s
+
+#6 [backend internal] load build context
+#6 transferring context: 1.74kB 0.1s done
+#6 DONE 0.1s
+
+#9 [frontend 3/5] COPY package*.json ./
+#9 CACHED
+
+#10 [frontend 4/5] RUN npm install --silent
+#10 CACHED
+
+#11 [backend 4/5] RUN npm install
+#11 CACHED
+
+#12 [frontend 2/5] WORKDIR /usr/src/app
+#12 CACHED
+
+#13 [backend 3/5] COPY package*.json ./
+#13 CACHED
+
+#14 [frontend 5/5] COPY . .
+#14 CACHED
+
+#15 [backend 5/5] COPY . .
+#15 CACHED
+
+#16 [backend] exporting to image
+#16 exporting layers done
+#16 writing image sha256:e5887d870751619e3e20ceb18b43e39958fd7797a2f5774d91268bc3e2f4b084 0.0s done
+#16 naming to docker.io/ravikishans/learnerreport:backend
+#16 naming to docker.io/ravikishans/learnerreport:backend 0.4s done
+#16 DONE 0.5s
+
+#17 [frontend] exporting to image
+#17 exporting layers done
+#17 writing image sha256:713fe69314a31086290f6faf593fa2ffcb6c1c96abaed01aed61f2e73715ab04 0.0s done
+#17 naming to docker.io/ravikishans/learnerreport:frontend 0.4s done
+#17 DONE 0.5s
+
+#18 [frontend] resolving provenance for metadata file
+#18 ...
+
+#19 [backend] resolving provenance for metadata file
+#19 DONE 1.1s
+
+#18 [frontend] resolving provenance for metadata file
+#18 DONE 1.1s
++ docker login -u ravikishans -p ****
+WARNING! Using --password via the CLI is insecure. Use --password-stdin.
+WARNING! Your password will be stored unencrypted in /var/lib/jenkins/.docker/config.json.
+Configure a credential helper to remove this warning. See
+https://docs.docker.com/engine/reference/commandline/login/#credential-stores
+
+Login Succeeded
++ docker-compose push
+time="2024-09-06T18:20:07+05:30" level=warning msg="/var/lib/jenkins/workspace/containerOrchestration@2/docker-compose.yml: the attribute `version` is obsolete, it will be ignored, please remove it to avoid potential confusion"
+ Pushing ravikishans/learnerreport:frontend: 546bb2cb37b8 Preparing 
+ Pushing ravikishans/learnerreport:backend: 240a3aad8eef Preparing 
+ Pushing ravikishans/learnerreport:backend: f6e6ceb7fc41 Preparing 
+ Pushing ravikishans/learnerreport:backend: b7637c463a4e Preparing 
+ Pushing ravikishans/learnerreport:backend: ed3ac2e63baf Preparing 
+ Pushing ravikishans/learnerreport:backend: be322b479aee Preparing 
+ Pushing ravikishans/learnerreport:backend: d41bcd3a037b Preparing 
+ Pushing ravikishans/learnerreport:backend: fe0d845e767b Preparing 
+ Pushing ravikishans/learnerreport:backend: f25ec1d93a58 Preparing 
+ Pushing ravikishans/learnerreport:backend: 794ce8b1b516 Preparing 
+ Pushing ravikishans/learnerreport:backend: 3220beed9b06 Preparing 
+ Pushing ravikishans/learnerreport:backend: 684f82921421 Preparing 
+ Pushing ravikishans/learnerreport:backend: 9af5f53e8f62 Preparing 
+ Pushing ravikishans/learnerreport:backend: 9af5f53e8f62 Waiting 
+ Pushing ravikishans/learnerreport:backend: 240a3aad8eef Waiting 
+ Pushing ravikishans/learnerreport:backend: f6e6ceb7fc41 Waiting 
+ Pushing ravikishans/learnerreport:backend: b7637c463a4e Waiting 
+ Pushing ravikishans/learnerreport:frontend: 3f4cfd180857 Preparing 
+ Pushing ravikishans/learnerreport:frontend: 9e790917329d Preparing 
+ Pushing ravikishans/learnerreport:frontend: ed3ac2e63baf Preparing 
+ Pushing ravikishans/learnerreport:frontend: be322b479aee Preparing 
+ Pushing ravikishans/learnerreport:frontend: d41bcd3a037b Preparing 
+ Pushing ravikishans/learnerreport:frontend: fe0d845e767b Preparing 
+ Pushing ravikishans/learnerreport:frontend: f25ec1d93a58 Preparing 
+ Pushing ravikishans/learnerreport:frontend: 794ce8b1b516 Preparing 
+ Pushing ravikishans/learnerreport:frontend: 3220beed9b06 Preparing 
+ Pushing ravikishans/learnerreport:frontend: 684f82921421 Preparing 
+ Pushing ravikishans/learnerreport:frontend: 9af5f53e8f62 Preparing 
+ Pushing ravikishans/learnerreport:frontend: d41bcd3a037b Waiting 
+ Pushing ravikishans/learnerreport:frontend: fe0d845e767b Waiting 
+ Pushing ravikishans/learnerreport:frontend: f25ec1d93a58 Waiting 
+ Pushing ravikishans/learnerreport:frontend: 794ce8b1b516 Waiting 
+ Pushing ravikishans/learnerreport:frontend: 3220beed9b06 Waiting 
+ Pushing ravikishans/learnerreport:frontend: 684f82921421 Waiting 
+ Pushing ravikishans/learnerreport:frontend: 9af5f53e8f62 Waiting 
+ Pushing ravikishans/learnerreport:backend: d41bcd3a037b Waiting 
+ Pushing ravikishans/learnerreport:backend: fe0d845e767b Waiting 
+ Pushing ravikishans/learnerreport:backend: f25ec1d93a58 Waiting 
+ Pushing ravikishans/learnerreport:backend: 794ce8b1b516 Waiting 
+ Pushing ravikishans/learnerreport:backend: 3220beed9b06 Waiting 
+ Pushing ravikishans/learnerreport:backend: 684f82921421 Waiting 
+ Pushing ravikishans/learnerreport:frontend: ed3ac2e63baf Layer already exists 
+ Pushing ravikishans/learnerreport:backend: ed3ac2e63baf Layer already exists 
+ Pushing ravikishans/learnerreport:frontend: be322b479aee Layer already exists 
+ Pushing ravikishans/learnerreport:frontend: 3f4cfd180857 Layer already exists 
+ Pushing ravikishans/learnerreport:frontend: 546bb2cb37b8 Layer already exists 
+ Pushing ravikishans/learnerreport:backend: be322b479aee Layer already exists 
+ Pushing ravikishans/learnerreport:frontend: 9e790917329d Layer already exists 
+ Pushing ravikishans/learnerreport:backend: 794ce8b1b516 Layer already exists 
+ Pushing ravikishans/learnerreport:frontend: 794ce8b1b516 Layer already exists 
+ Pushing ravikishans/learnerreport:frontend: d41bcd3a037b Layer already exists 
+ Pushing ravikishans/learnerreport:frontend: f25ec1d93a58 Layer already exists 
+ Pushing ravikishans/learnerreport:backend: f25ec1d93a58 Layer already exists 
+ Pushing ravikishans/learnerreport:backend: d41bcd3a037b Layer already exists 
+ Pushing ravikishans/learnerreport:backend: fe0d845e767b Layer already exists 
+ Pushing ravikishans/learnerreport:frontend: fe0d845e767b Layer already exists 
+ Pushing ravikishans/learnerreport:frontend: 3220beed9b06 Layer already exists 
+ Pushing ravikishans/learnerreport:backend: 3220beed9b06 Layer already exists 
+ Pushing ravikishans/learnerreport:backend: 684f82921421 Layer already exists 
+ Pushing ravikishans/learnerreport:frontend: 684f82921421 Layer already exists 
+ Pushing ravikishans/learnerreport:frontend: 9af5f53e8f62 Layer already exists 
+ Pushing ravikishans/learnerreport:backend: 9af5f53e8f62 Layer already exists 
+ Pushing ravikishans/learnerreport:backend: f6e6ceb7fc41 Layer already exists 
+ Pushing ravikishans/learnerreport:backend: 240a3aad8eef Layer already exists 
+ Pushing ravikishans/learnerreport:backend: b7637c463a4e Layer already exists 
+[Pipeline] }
+[Pipeline] // script
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Deploy to Kubernetes using Helm)
+[Pipeline] script
+[Pipeline] {
+[Pipeline] withCredentials
+Masking supported pattern matches of $KUBECONFIG
+[Pipeline] {
+[Pipeline] sh
+Warning: A secret was passed to "sh" using Groovy String interpolation, which is insecure.
+		 Affected argument(s) used the following variable(s): [KUBECONFIG]
+		 See https://jenkins.io/redirect/groovy-string-interpolation for details.
++ helm upgrade --install learnerreport ./k8s/helm-package/learnerreport --namespace default --create-namespace --kubeconfig=**** --debug
+history.go:56: [debug] getting history for release learnerreport
+upgrade.go:158: [debug] preparing upgrade for learnerreport
+upgrade.go:166: [debug] performing update for learnerreport
+upgrade.go:364: [debug] creating upgraded release for learnerreport
+client.go:393: [debug] checking 13 resources for changes
+client.go:684: [debug] Looks like there are no changes for Namespace "backendlr"
+client.go:684: [debug] Looks like there are no changes for Namespace "databaselr"
+client.go:684: [debug] Looks like there are no changes for Namespace "frontendlr"
+client.go:684: [debug] Looks like there are no changes for Secret "backend-secret"
+client.go:684: [debug] Looks like there are no changes for ConfigMap "lr-config"
+client.go:684: [debug] Looks like there are no changes for PersistentVolume "mongodb-pv"
+client.go:684: [debug] Looks like there are no changes for PersistentVolumeClaim "mongodb-pvc"
+client.go:684: [debug] Looks like there are no changes for Service "lrbeservice"
+client.go:684: [debug] Looks like there are no changes for Service "mongodb-service"
+client.go:684: [debug] Looks like there are no changes for Service "lrfeservice"
+client.go:684: [debug] Looks like there are no changes for Deployment "lrbedeploy"
+client.go:684: [debug] Looks like there are no changes for Deployment "mongodb-deployment"
+client.go:684: [debug] Looks like there are no changes for Deployment "lrfedeployment"
+upgrade.go:174: [debug] updating status for upgraded release for learnerreport
+Release "learnerreport" has been upgraded. Happy Helming!
+NAME: learnerreport
+LAST DEPLOYED: Fri Sep  6 18:20:25 2024
+NAMESPACE: default
+STATUS: deployed
+REVISION: 7
+TEST SUITE: None
+USER-SUPPLIED VALUES:
+{}
+
+COMPUTED VALUES:
+backend:
+  env:
+    MONGO_URL: mongodb://mongodb-service.databaselr.svc.cluster.local:27017/learnerreport
+    PORT: "3001"
+  image:
+    repository: ravikishans/learnerreport
+    tag: backend
+  namespace: backendlr
+  ports:
+    containerPort: 3001
+    protocol: TCP
+  replicas: 2
+  service:
+    port: 3001
+database:
+  namespace: databaselr
+  pvc:
+    storage: 3Gi
+  service:
+    port: 27017
+    targetPort: 27017
+frontend:
+  data:
+    REACT_APP_BACKEND_URL: http://localhost:3001
+  image:
+    repository: ravikishans/learnerreport
+    tag: frontend
+  namespace: frontendlr
+  replicas: 2
+  service:
+    port: 3000
+    targetPort: 3000
+
+HOOKS:
+MANIFEST:
+---
+# Source: learnerreport/templates/backend/namespace.yaml
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: backendlr
+---
+# Source: learnerreport/templates/database/db-namespace.yaml
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: databaselr
+---
+# Source: learnerreport/templates/frontend/namespace.yaml
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: frontendlr
+---
+# Source: learnerreport/templates/backend/secret.yaml
+apiVersion: v1
+kind: Secret
+metadata:
+  name: backend-secret
+  namespace: backendlr
+data:
+  MONGO_URI: bW9uZ29kYjovL21vbmdvZGItc2VydmljZS5kYXRhYmFzZWxyLnN2Yy5jbHVzdGVyLmxvY2FsOjI3MDE3L2xlYXJuZXJyZXBvcnQ=
+  # mongodb://mongodb-service.databaselr.svc.cluster.local:27017/learnerreport
+type: Opaque
+---
+# Source: learnerreport/templates/frontend/configmap.yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: lr-config
+  namespace: frontendlr
+  labels:
+    app: learnerreport
+data:
+  REACT_APP_BACKEND_URL: http://localhost:3001
+---
+# Source: learnerreport/templates/database/pv.yaml
+#### pv.yml will just create the storage #### 
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: mongodb-pv
+  namespace: databaselr
+spec:
+  capacity:
+    storage: 3Gi  
+  accessModes:
+  - ReadWriteOnce
+  hostPath:
+    path: /mnt/data
+---
+# Source: learnerreport/templates/database/pvc.yaml
+#### Claiming the pv space ####
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: mongodb-pvc
+  namespace: databaselr
+spec:
+  resources:
+    requests:
+      storage: 3Gi
+  # volumeMode: Filesystem
+  accessModes:
+  - ReadWriteOnce
+---
+# Source: learnerreport/templates/backend/service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: lrbeservice
+  namespace: backendlr
+spec:
+  selector:
+    app: lrbedeploy
+  ports:
+  - port: 3001
+    targetPort: 3001
+  type: ClusterIP
+---
+# Source: learnerreport/templates/database/db-service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: mongodb-service
+  namespace: databaselr
+spec:
+  selector:
+    app: mongodb
+  ports:
+  - protocol: TCP
+    port: 27017
+    targetPort: 27017
+  type: ClusterIP
+---
+# Source: learnerreport/templates/frontend/service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: lrfeservice
+  namespace: frontendlr
+spec:
+  selector:
+    app: learnerreport
+  ports:
+  - protocol: TCP
+    port: 3000
+    targetPort: 3000
+---
+# Source: learnerreport/templates/backend/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: lrbedeploy
+  namespace: backendlr
+spec:
+  selector:
+    matchLabels:
+      app: lrbedeploy
+  template:
+    metadata:
+      labels:
+        app: lrbedeploy
+    spec:
+      containers:
+      - name: lrbedeploy
+        image: ravikishans/learnerreport:backend
+        env:
+        - name: MONGO_URI
+          valueFrom:
+            secretKeyRef:
+              name: backend-secret
+              key: MONGO_URI
+        - name: PORT
+          value: "3001"
+        ports:
+        - containerPort: 3001
+---
+# Source: learnerreport/templates/database/db-deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mongodb-deployment
+  namespace: databaselr
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mongodb
+  template:
+    metadata:
+      labels:
+        app: mongodb
+    spec:
+      containers:
+      - name: mongodb
+        image: mongo:latest
+        ports:
+        - containerPort: 27017
+        volumeMounts:
+        - mountPath: /data/db
+          name: mongodb-storage
+      volumes:
+      - name: mongodb-storage
+        persistentVolumeClaim:
+          claimName: mongodb-pvc
+---
+# Source: learnerreport/templates/frontend/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: lrfedeployment
+  namespace: frontendlr
+spec:
+  selector:
+    matchLabels:
+      app: learnerreport
+  template:
+    metadata:
+      labels:
+        app: learnerreport
+    spec:
+      containers:
+      - name: lrfedeployment
+        image: ravikishans/learnerreport:frontend
+        env:
+        - name: REACT_APP_BACKEND_URL
+          valueFrom:
+            configMapKeyRef:
+              name: lr-config
+              key: REACT_APP_BACKEND_URL
+        ports:
+        - containerPort: 3000
+
+[Pipeline] }
+[Pipeline] // withCredentials
+[Pipeline] }
+[Pipeline] // script
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Verify Deployments)
+[Pipeline] script
+[Pipeline] {
+[Pipeline] withCredentials
+Masking supported pattern matches of $KUBECONFIG
+[Pipeline] {
+[Pipeline] sh
+Warning: A secret was passed to "sh" using Groovy String interpolation, which is insecure.
+		 Affected argument(s) used the following variable(s): [KUBECONFIG]
+		 See https://jenkins.io/redirect/groovy-string-interpolation for details.
++ kubectl get pods -n backendlr --kubeconfig=****
+NAME                         READY   STATUS    RESTARTS   AGE
+lrbedeploy-bf98697d4-hp9lp   1/1     Running   0          39m
+[Pipeline] sh
+Warning: A secret was passed to "sh" using Groovy String interpolation, which is insecure.
+		 Affected argument(s) used the following variable(s): [KUBECONFIG]
+		 See https://jenkins.io/redirect/groovy-string-interpolation for details.
++ kubectl get pods -n frontendlr --kubeconfig=****
+NAME                              READY   STATUS    RESTARTS   AGE
+lrfedeployment-7b75455446-ktl4v   1/1     Running   0          39m
+[Pipeline] sh
+Warning: A secret was passed to "sh" using Groovy String interpolation, which is insecure.
+		 Affected argument(s) used the following variable(s): [KUBECONFIG]
+		 See https://jenkins.io/redirect/groovy-string-interpolation for details.
++ kubectl get pods -n databaselr --kubeconfig=****
+NAME                                  READY   STATUS    RESTARTS   AGE
+mongodb-deployment-56d6d8596d-sxmcm   1/1     Running   0          39m
+[Pipeline] }
+[Pipeline] // withCredentials
+[Pipeline] }
+[Pipeline] // script
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Declarative: Post Actions)
+[Pipeline] echo
+Pipeline executed successfully!
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // withCredentials
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // node
+[Pipeline] End of Pipeline
+Finished: SUCCESS

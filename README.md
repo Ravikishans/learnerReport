@@ -215,9 +215,6 @@ pipeline {
                     sh """
                         helm upgrade --install ${HELM_RELEASE_NAME} ${HELM_CHART_PATH} \
                             --namespace default --create-namespace \
-                            --set image.repository.backend=${DOCKER_REGISTRY}/backend \
-                            --set image.repository.frontend=${DOCKER_REGISTRY}/frontend \
-                            --set image.tag=latest \
                             --kubeconfig=$KUBECONFIG --debug
                     """
                 }
@@ -225,7 +222,9 @@ pipeline {
         }
         stage('Verify Deployment') {
             steps {
-                sh "kubectl get pods --namespace default --kubeconfig=$KUBECONFIG"
+                sh "kubectl get pods -n ${BACKEND_NAMESPACE} --kubeconfig=$KUBECONFIG"
+                sh "kubectl get pods -n ${FRONTEND_NAMESPACE} --kubeconfig=$KUBECONFIG"
+                sh "kubectl get pods -n ${DATABASE_NAMESPACE} --kubeconfig=$KUBECONFIG"
             }
         }
     }
@@ -237,7 +236,9 @@ pipeline {
 Once the pipeline is executed, you can verify the deployment by running the following command:
 
 ```bash
-kubectl get pods --namespace default
+kubectl get all --namespace=backendlr
+kubectl get all --namespace=databaselr
+kubectl get all --namespace=frontendlr
 ```
 
 Ensure that the pods for the backend, frontend, and database are running successfully.
