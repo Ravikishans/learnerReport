@@ -231,6 +231,33 @@ pipeline {
 }
 ```
 
+---
+
+## **Jenkins Authentication Setup**
+
+### **1. Setting Up Docker Credentials in Jenkins**
+
+To push Docker images to your Docker Hub or private registry, you need to configure credentials in Jenkins.
+
+#### **Step 1: Add Docker Credentials**
+
+1. Go to Jenkins dashboard -> Manage Jenkins -> Manage Credentials.
+2. Add new credentials:
+   - **Username**: Your Docker Hub or registry username.
+   - **Password**: Your Docker Hub or registry password.
+   - **ID**: `dockerhub-credentials` (used in the Jenkinsfile).
+
+#### **Step 2: Add Kubernetes Kubeconfig File as a Credential**
+
+1. Save your Kubeconfig file (usually located at `~/.kube/config`) locally.
+2. Go to Jenkins dashboard -> Manage Jenkins -> Manage Credentials.
+3. Add new credentials:
+   - **Kind**: Secret file
+   - **File**: Upload your Kubeconfig file.
+   - **ID**: `kubeconfig-credentials`.
+
+This Kubeconfig file will be used by Jenkins to access the Kubernetes cluster during the deployment process.
+
 ## **Deployment Verification**
 
 Once the pipeline is executed, you can verify the deployment by running the following command:
@@ -243,4 +270,46 @@ kubectl get all --namespace=frontendlr
 
 Ensure that the pods for the backend, frontend, and database are running successfully.
 
+## **Troubleshooting**
+
+### **Common Issues**
+
+1. **Permission Denied for Minikube Cluster:**
+   If you encounter permission errors like `unable to read client-key`, it could be related to file permissions. Ensure that the Helm process has access to the Kubeconfig file and all the necessary keys.
+   
+   **Fix:**
+   ```
+   sudo chmod 600 ~/.minikube/profiles/minikube/client.key
+   sudo chmod 600 ~/.minikube/profiles/minikube/client.crt
+   sudo chmod 600 ~/.minikube/ca.crt
+   ```
+
+2. **Kubernetes Cluster Unreachable:**
+   If Helm or kubectl cannot reach the Kubernetes cluster, make sure your cluster is running
+
+ and your kubeconfig is pointing to the correct cluster.
+
+   **Fix:**
+   ```
+   kubectl config use-context <context-name>
+   minikube start
+   ```
+
+3. **Docker Image Pull Failure:**
+   If Kubernetes cannot pull Docker images, ensure the image is publicly available (if using Docker Hub) or that the Kubernetes cluster has access to your private Docker registry credentials.
+
+   **Fix:**
+   ```
+   kubectl create secret docker-registry <secret-name> \
+       --docker-server=<registry-server> \
+       --docker-username=<username> \
+       --docker-password=<password> \
+       --docker-email=<email>
+   ```
+
+4. **Helm Installation Errors:**
+   Helm installation might fail due to improper configuration or missing values.
+
+   **Fix:**
+   Double-check the `values.yaml` file in your Helm chart and ensure that all necessary values (image repository, tag, etc.) are properly defined.
 ---
