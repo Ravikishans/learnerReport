@@ -254,7 +254,7 @@ To push Docker images to your Docker Hub or private registry, you need to config
 ```bash
 kubectl config view --raw
 ```
-copy and save it's output in Kubeconfig file.
+Copy and save it's output in Kubeconfig file.
 
 2. Go to Jenkins dashboard -> Manage Jenkins -> Manage Credentials.
 3. Add new credentials:
@@ -279,6 +279,11 @@ Ensure that the pods for the backend, frontend, and database are running success
 ## **Troubleshooting**
 
 ### **Common Issues**
+
+0. **Check for logs:**
+    ```bash
+    minikube logs
+    ```
 
 1. **Permission Denied for Minikube Cluster:**
    If you encounter permission errors like `unable to read client-key`, it could be related to file permissions. Ensure that the Helm process has access to the Kubeconfig file and all the necessary keys.
