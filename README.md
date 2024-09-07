@@ -250,6 +250,10 @@ To push Docker images to your Docker Hub or private registry, you need to config
 #### **Step 2: Add Kubernetes Kubeconfig File as a Credential**
 
 1. Save your Kubeconfig file (usually located at `~/.kube/config`) locally.
+'''bash
+kubectl config view --raw
+'''
+copy and save it's output in Kubeconfig file.
 2. Go to Jenkins dashboard -> Manage Jenkins -> Manage Credentials.
 3. Add new credentials:
    - **Kind**: Secret file
